@@ -1,19 +1,18 @@
-var Dispatcher = require('../dispatcher/dispatcher'),
-    ApiActions = require('../actions/api_actions'),
-    BenchStore = require('../stores/bench');
+var ApiActions = require('../actions/api_actions');
 
 ApiUtil = {
   fetchBenches: function(){
-    $.get({
+    $.ajax({
+      type: "GET",
       url: "api/benches",
       success: function(benches){
+        console.log("test");
         ApiActions.receiveAll(benches);
-        BenchStore.all();
       }
     });
   }
 };
 
-window.ApiUtil = ApiUtil;
+// window.ApiUtil = ApiUtil;
 
 module.exports = ApiUtil;

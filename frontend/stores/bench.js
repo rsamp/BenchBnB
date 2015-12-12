@@ -13,16 +13,16 @@ var resetBenches = function(benches){
   _benches = benches;
 };
 
-BenchStore._onDispatch = function(payload){
+BenchStore.__onDispatch = function(payload){
   switch (payload.actionType) {
     case BenchConstants.BENCHES_RECEIVED:
       var result = resetBenches(payload.benches);
-      BenchStore._emitChange();
+      BenchStore.__emitChange();
       break;
 
   }
 };
 
-window.BenchStore = BenchStore;
+// window.BenchStore = BenchStore;
 
 module.exports = BenchStore;
