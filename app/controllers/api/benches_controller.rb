@@ -1,6 +1,6 @@
 class Api::BenchesController < ApplicationController
   def index
-    @benches = Bench.all
+    @benches = Bench.in_bounds(params[:bounds])
   end
 
   def create
@@ -8,6 +8,10 @@ class Api::BenchesController < ApplicationController
 
     @bench.save!
     redirect_to :index
+  end
+
+  def new
+
   end
 
   private

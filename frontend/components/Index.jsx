@@ -5,7 +5,6 @@ var React = require('react'),
 var Index = React.createClass({
   getInitialState: function(){
     return { benches: BenchStore.all() };
-    console.log(this.state.benches);
   },
 
   _onChange: function(){
@@ -14,7 +13,7 @@ var Index = React.createClass({
 
   componentDidMount: function(){
     BenchStore.addListener(this._onChange);
-    ApiUtil.fetchBenches();
+    // ApiUtil.fetchBenches();
   },
 
   componentWillUnmount: function(){

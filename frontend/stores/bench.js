@@ -13,13 +13,20 @@ var resetBenches = function(benches){
   _benches = benches;
 };
 
+var createBench = function(bench){
+  _benches.push(bench);
+}
+
 BenchStore.__onDispatch = function(payload){
   switch (payload.actionType) {
     case BenchConstants.BENCHES_RECEIVED:
       var result = resetBenches(payload.benches);
       BenchStore.__emitChange();
       break;
-
+    case BenchConstants.NEW_BENCH:
+      var result = createBench(payload.bench);
+      BenchStore.__emitChange();
+      break;
   }
 };
 
