@@ -12,12 +12,11 @@ var Index = React.createClass({
   },
 
   componentDidMount: function(){
-    BenchStore.addListener(this._onChange);
-    // ApiUtil.fetchBenches();
+    this.benchListener = BenchStore.addListener(this._onChange);
   },
 
   componentWillUnmount: function(){
-    BenchStore.removeListener(this._onChange);
+    this.benchListener.remove();
   },
 
   render: function(){

@@ -7,11 +7,10 @@ class Api::BenchesController < ApplicationController
     @bench = Bench.new(bench_params)
 
     @bench.save!
-    redirect_to :index
+    redirect_to root_url
   end
 
   def new
-
   end
 
   private

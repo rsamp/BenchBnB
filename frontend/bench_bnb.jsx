@@ -5,14 +5,14 @@ var React = require('react'),
     Route = ReactRouter.Route,
     IndexRoute = ReactRouter.IndexRoute,
     BenchStore = require('./stores/bench'),
-    Search = require('./components/Search'),
+    Search = require('./components/Search');
     BenchForm = require('./components/BenchForm');
 
 var App = React.createClass({
   render: function(){
     return(
       <div>
-        <header><h1>Bench BnB</h1></header>
+        <a href='/'><header><h1>Bench BnB</h1></header></a>
         {this.props.children}
       </div>
     );
@@ -24,10 +24,10 @@ var routes = (
     <IndexRoute component={Search}/>
     <Route path="api/benches/new" component={BenchForm}/>
   </Route>
-)
+);
 
-var root = document.getElementById('content');
 
-document.addEventListener("DOMContentLoaded", function(){
-  ReactDOM.render(<Search/>, root);
+$(function(){
+  var root = document.getElementById('content');
+  ReactDOM.render(<Router>{routes}</Router>, root);
 })

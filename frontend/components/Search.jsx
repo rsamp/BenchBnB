@@ -3,11 +3,15 @@ var React = require('react'),
     Index = require('./Index');
 
 var Search = React.createClass({
+  clickMapHandler: function(coords){
+    var url = "/api/benches/new"
+    this.props.history.pushState(null, url, coords)
+  },
 
   render: function(){
     return(
       <div>
-        <Map/>
+        <Map onClick={this.clickMapHandler}/>
         <Index/>
       </div>
     );

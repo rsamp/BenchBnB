@@ -4,6 +4,7 @@ var React = require('react'),
     ApiUtil = require('../util/api_util');
 
 var Map = React.createClass({
+
   getInitialState: function(){
     return { benches: BenchStore.all() };
   },
@@ -28,8 +29,19 @@ var Map = React.createClass({
       var boundsObj = { "northEast":
                             {"lat": northEast.lat(), "lng": northEast.lng()},
                         "southWest":
-                            {"lat": southWest.lat(), "lng": southWest.lng()}}
+                            {"lat": southWest.lat(), "lng": southWest.lng()}};
       ApiUtil.fetchBenches(boundsObj);
+    }.bind(this));
+  },
+
+  listenForClick: function(){
+    google.maps.event.addListener(this.map, 'click', function(e){
+      // debugger;
+      var lat = e.latLng.lat();
+      var lng = e.latLng.lng();
+      // console.log(e.latLng.lat());
+      var coords= {lat: lat, lng: lng}
+      this.props.onClick(coords);
     }.bind(this));
   },
 
@@ -40,12 +52,13 @@ var Map = React.createClass({
       zoom: 13
     };
     this.map = new google.maps.Map(map, mapOptions);
+    this.benchListener = BenchStore.addListener(this._onChange);
     this.listenForMove();
-    BenchStore.addListener(this._onChange);
+    this.listenForClick();
   },
 
   componentWillUnmount: function(){
-    BenchStore.removeListener(this._onChange);
+    this.benchListener.remove();
   },
 
   render: function(){

@@ -12,17 +12,16 @@ ApiUtil = {
     })
   },
 
-  createBench: function(){
+  createBench: function(bench){
     $.ajax({
       type: "POST",
-      url: "api/benches/new/",
+      data: {bench: bench},
+      url: "api/benches/",
       success: function(bench){
         ApiActions.newBench(bench)
       }
     })
   }
 };
-
-// window.ApiUtil = ApiUtil;
 
 module.exports = ApiUtil;

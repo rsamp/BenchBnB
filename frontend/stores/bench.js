@@ -14,22 +14,19 @@ var resetBenches = function(benches){
 };
 
 var createBench = function(bench){
-  _benches.push(bench);
+  _benches[bench.id] = bench;
 }
 
 BenchStore.__onDispatch = function(payload){
   switch (payload.actionType) {
     case BenchConstants.BENCHES_RECEIVED:
       var result = resetBenches(payload.benches);
-      BenchStore.__emitChange();
       break;
     case BenchConstants.NEW_BENCH:
       var result = createBench(payload.bench);
-      BenchStore.__emitChange();
       break;
   }
+  BenchStore.__emitChange();
 };
-
-// window.BenchStore = BenchStore;
 
 module.exports = BenchStore;
